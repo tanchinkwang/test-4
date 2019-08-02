@@ -24,6 +24,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
+    _currentPosition = new Position(longitude: 50.0, latitude: 50.0);  // ADD default location
 
     _initLastKnownLocation();
     _initCurrentLocation();
@@ -84,14 +85,13 @@ class _MyAppState extends State<MyApp> {
 
   GoogleMapController mapController;
 
-  final LatLng _center = const LatLng(_currentPosition.latitude, _currentPosition.longitude);
-
   void _onMapCreated(GoogleMapController controller) {
     mapController = controller;
   }
 
   @override
   Widget build(BuildContext context) {
+    final LatLng _center = const LatLng(_currentPosition.latitude, _currentPosition.longitude);
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
