@@ -25,7 +25,7 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     _currentPosition = new Position(longitude: 50.0, latitude: 50.0);  // ADD default location
-
+    print(_currentPosition);
     _initLastKnownLocation();
     _initCurrentLocation();
   }
@@ -36,7 +36,6 @@ class _MyAppState extends State<MyApp> {
 
     setState(() {
       _lastKnownPosition = null;
-      _currentPosition = null;
     });
 
     _initLastKnownLocation();
@@ -84,6 +83,7 @@ class _MyAppState extends State<MyApp> {
   }
 
   GoogleMapController mapController;
+  final LatLng _center =  LatLng(_currentPosition.latitude, _currentPosition.longitude);
 
   void _onMapCreated(GoogleMapController controller) {
     mapController = controller;
@@ -91,6 +91,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -105,7 +106,7 @@ class _MyAppState extends State<MyApp> {
                   child: GoogleMap(
                     onMapCreated: _onMapCreated,
                     initialCameraPosition: CameraPosition(
-                      target: LatLng(_currentPosition.latitude, _currentPosition.longitude), // delete _center
+                      target: _center,
                       zoom: 11.0,
                     ),
                   ),
