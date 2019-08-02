@@ -91,7 +91,6 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    final LatLng _center = const LatLng(_currentPosition.latitude, _currentPosition.longitude);
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -106,7 +105,7 @@ class _MyAppState extends State<MyApp> {
                   child: GoogleMap(
                     onMapCreated: _onMapCreated,
                     initialCameraPosition: CameraPosition(
-                      target: _center,
+                      target: LatLng(_currentPosition.latitude, _currentPosition.longitude), // delete _center
                       zoom: 11.0,
                     ),
                   ),
